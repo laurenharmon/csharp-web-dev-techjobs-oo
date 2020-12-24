@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace TechJobsOO
 {
     public class Job
@@ -29,6 +31,7 @@ namespace TechJobsOO
 
         }
 
+        // TODO: Generate Equals() and GetHashCode() methods.
         public override bool Equals(object obj)
         {
             return obj is Job job &&
@@ -40,8 +43,48 @@ namespace TechJobsOO
             return HashCode.Combine(Id);
         }
 
+        public override string ToString()
+        {
+            string unavailable = "Data Not Available";
+            string newline = "\n";
+            string blankLine = " ";
+            string blank = "";
 
-        // TODO: Generate Equals() and GetHashCode() methods.
+                //wow i have to find a way to change this 
+                if (Name == blank)
+                {
+                    Name = unavailable;
+                }
+                else if (this.EmployerName.Value == blank)
+                {
+                    EmployerName.Value = unavailable;
+                }
+                else if (EmployerLocation.Value == blank)
+                {
+                    EmployerLocation.Value = unavailable;
+                }
+                else if (JobType.Value == blank)
+                {
+                    JobType.Value = unavailable;
+                }
+                else if (JobCoreCompetency.Value == blank)
+                {
+                    JobCoreCompetency.Value = unavailable;
+                }
+
+                return blankLine + newline
+                    + "ID: " + Id + newline
+                    + "Name: " + Name + newline
+                    + "Employer: " + EmployerName + newline
+                    + "Location: " + EmployerLocation + newline
+                    + "Position Type: " + JobType + newline
+                    + "Core Competency: " + JobCoreCompetency + newline +
+                    blankLine
+                    ;
+            //}
+        }
+
+
 
 
     }

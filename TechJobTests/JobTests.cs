@@ -6,6 +6,7 @@ namespace TechJobTests
     [TestClass]
     public class JobTests
     {
+
         [TestMethod]
         public void TestSettingJobID()
         {
@@ -50,5 +51,70 @@ namespace TechJobTests
             // override object.Equals
             Assert.IsFalse(testerOne.Equals(testerTwo));
         }
+
+        [TestMethod]
+        public void TestJobReturnsBlankLineBeforeInformation()
+        {
+            Employer aliens = new Employer("aliens");
+            Location ocean = new Location("ocean");
+            PositionType octopus = new PositionType("octopus");
+            CoreCompetency punching = new CoreCompetency("punching fish");
+            Job tester = new Job("Octopus", aliens, ocean, octopus, punching);
+            string blankLine = " ";
+
+            Assert.AreEqual(blankLine, tester.ToString().Substring(0,1));
+        }
+
+        [TestMethod]
+        public void TestJobContainsLabelFollowedByDataOnOwnLine()
+        {
+            Employer aliens = new Employer("aliens");
+            Location ocean = new Location("ocean");
+            PositionType octopus = new PositionType("octopus");
+            CoreCompetency punching = new CoreCompetency("punching fish");
+            Job tester = new Job("Octopus", aliens, ocean, octopus, punching);
+
+            string blankLine = " ";
+            string newline = "\n";
+
+            string toStringTester = blankLine + newline 
+                + "ID: " + tester.Id + newline
+                + "Name: " + tester.Name + newline
+                + "Employer: " + tester.EmployerName + newline
+                + "Location: " + tester.EmployerLocation + newline
+                + "Position Type: " + tester.JobType + newline
+                + "Core Competency: " + tester.JobCoreCompetency + newline +
+                blankLine;
+
+            Assert.AreEqual(toStringTester, tester.ToString());
+        }
+
+        [TestMethod]
+        public void DataNotAvailableIfFieldIsEmpty()
+        {
+            string expectedUnavailable = "Data Not Available";
+            Employer aliens = new Employer("aliens");
+            Location ocean = new Location("ocean");
+            PositionType octopus = new PositionType("octopus");
+            CoreCompetency punching = new CoreCompetency("punching fish");
+            Job tester = new Job("", aliens, ocean, octopus, punching);
+
+            tester.ToString();
+
+            Assert.AreEqual(expectedUnavailable, tester.Name);
+        }
+
+        //[TestMethod]
+        //public void BONUSTestForOopsNoData()
+        //{
+        //    Employer aliens = new Employer("");
+        //    Location ocean = new Location("");
+        //    PositionType octopus = new PositionType("");
+        //    CoreCompetency punching = new CoreCompetency("");
+        //    Job tester = new Job("", aliens, ocean, octopus, punching);
+        //    string missingAllData = "OOPS! This job does not seem to exist!";
+
+        //    Assert.AreEqual(missingAllData, tester.ToString());
+        //}
     }
 }
